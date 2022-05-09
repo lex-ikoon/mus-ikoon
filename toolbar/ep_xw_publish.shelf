@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shelfDocument>
+  <!-- This file contains definitions of shelves, toolbars, and tools.
+ It should not be hand-edited when it is being used by the application.
+ Note, that two definitions of the same element are not allowed in
+ a single file. -->
+
+  <toolshelf name="ep_xw_publish" label="ep_xw_publish">
+    <memberTool name="generate_html"/>
+  </toolshelf>
+
+  <tool name="generate_html" label="generate_html" icon="PLASMA_App">
+    <script scriptType="python"><![CDATA[import ep_xw_publish
+import imp
+imp.reload(ep_xw_publish)
+ep_xw_publish.generate_html()]]></script>
+  </tool>
+</shelfDocument>

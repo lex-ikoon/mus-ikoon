@@ -1,0 +1,11 @@
+float xa_coord_music(string array; int pitch, clone, frame)
+{
+    float  amp;
+    string path    = "op:" + opfullpath("..") + "/notes/generator/" + array;
+    int    pitches = detail(path,"track_pitches",0);
+    int    first   = detail(path,"array_frame_first",0);
+    int    prim    = pitch + (clone * pitches);
+    vector vertex  = vertex(path, "P", prim, frame-first);
+           amp     = vertex[1];
+    return amp;
+}
