@@ -1,11 +1,7 @@
 import hou
 import os
-# import subprocess
-# import re
-import pickle
 import wf_selection
-
-import hou
+from shutil import copyfile
 
 
 
@@ -14,12 +10,11 @@ def generate_html() :
 
     # TODO:
     #------------------------------------------------------------
-    # .gitignore
-    # Q:\_packages\ep_ikoon\_library
-    # Q:\_packages\ep_ikoon\_rnd
+    # category.XPU
+    # category.VELLUM
+    # category.UNREAL
+    # category.SIMULATION
 
-    # keep this folder to keep track of the updates
-    # Q:\_packages\ep_ikoon\_web
 
 
     # init variables
@@ -58,11 +53,39 @@ def generate_html() :
     
     for directory in directories :
         print(directory)
-        # read category
+        # read categories
+        # read weight
         # replace category
         # change to lowercase
 
 
+
+
+
+
+
+    src_py     = "python2.7libs/"
+    src_shelf  = "toolbar/"
+        
+
+        # shelf
+        try :
+            src = root + src_shelf + "wf_" + file + ".shelf"
+            dst = root + git + src_shelf + "/wf_" + file + ".shelf"
+            copyfile(src, dst)
+        except :
+            pass
+
+    # write index.html to disk
+    #------------------------------------------------------------
+    # paths
+    # for (filenum, file) in enumerate(files):
+    #     path_html = dir_root + dir_blog + file + ".html"
+    #     file_html = open( path_html )
+
+    # xml_data += xml_end
+    # file_xml = open( path_xml, 'w' )
+    # file_xml.write(xml_data)    
         
 
 
@@ -143,29 +166,3 @@ def parse_tab_vex () :
                 toolnames.append(toolname)
 
 
-    # write to disk
-    #------------------------------------------------------------
-    # paths
-    path_snippets    = path_VEX_db + "tab_vex_snippets.db"
-    path_nodenames   = path_VEX_db + "tab_vex_nodenames.db"
-    path_sourcefiles = path_VEX_db + "tab_vex_sourcefiles.db"
-    path_sourcelines = path_VEX_db + "tab_vex_sourcelines.db"
-    path_toolnames   = path_VEX_db + "tab_vex_toolnames.db"
-    # files
-    file_snippets    = open( path_snippets, 'wb')
-    file_nodenames   = open( path_nodenames, 'wb')
-    file_sourcefiles = open( path_sourcefiles, 'wb')
-    file_sourcelines = open( path_sourcelines, 'wb')
-    file_toolnames   = open( path_toolnames, 'wb')
-    # write
-    pickle.dump(snippets, file_snippets )
-    pickle.dump(nodenames, file_nodenames )
-    pickle.dump(sourcefiles, file_sourcefiles )
-    pickle.dump(sourcelines, file_sourcelines )        
-    pickle.dump(toolnames, file_toolnames )
-    # close
-    file_snippets.close()
-    file_nodenames.close()
-    file_sourcefiles.close()
-    file_sourcelines.close()
-    file_toolnames.close()
