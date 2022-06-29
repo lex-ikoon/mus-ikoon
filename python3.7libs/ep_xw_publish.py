@@ -19,9 +19,9 @@ def generate_html() :
 
     # init variables
     #------------------------------------------------------------
-    # {"ep_path":       "Q:/_packages/ep_ikoon"},
-    library_root = hou.getenv("ep_path") + "/_library/"
-    web_root     = hou.getenv("ep_path") + "/_web/"
+    # {"mus_path":       "Q:/_packages/ep_ikoon"},
+    library_root = hou.getenv("mus_path") + "/_library/"
+    web_root     = hou.getenv("mus_path") + "/_web/"
 
 
     # collect all directories
