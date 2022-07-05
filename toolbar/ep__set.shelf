@@ -6,6 +6,6 @@
  a single file. -->
 
   <shelfSet name="ep__set" label="ep__set">
-    <memberToolshelf name="ep_xw_publish"/>
+    <memberToolshelf name="mus_publish"/>
   </shelfSet>
 </shelfDocument>

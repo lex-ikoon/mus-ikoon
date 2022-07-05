@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shelfDocument>
+  <!-- This file contains definitions of shelves, toolbars, and tools.
+ It should not be hand-edited when it is being used by the application.
+ Note, that two definitions of the same element are not allowed in
+ a single file. -->
+
+  <toolshelf name="mus_publish" label="mus_publish">
+    <memberTool name="mus_collect"/>
+  </toolshelf>
+
+  <tool name="mus_collect" label="mus_collect" icon="PLASMA_App">
+    <script scriptType="python"><![CDATA[import mus_publish
+import imp
+imp.reload(mus_publish)
+mus_publish.mus_collect()]]></script>
+  </tool>
+</shelfDocument>
