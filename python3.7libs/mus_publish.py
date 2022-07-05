@@ -259,3 +259,25 @@ def mus_collect () :
     file_html_www = open( path_html_www, 'w' )
     file_html_mus.write(html_mus)
     file_html_www.write(html_www)
+
+
+
+    # update the README.md
+    # -----------------------------------------------------------------------------
+    readme = "[Link text Here](https://link-url-here.org)"
+
+    for index in range(len(MUS_job_names)):
+
+        # MP4 newname    ------------------
+        readme += MUS_categories[index] + "___" + validate_unix(MUS_job_names[index])
+
+        if MUS_news[index] :
+            readme += " // NEW"
+
+
+
+
+    # -----------------------------------------------------------------------------
+    # everything is done here
+    # -----------------------------------------------------------------------------
+
