@@ -2,6 +2,7 @@ import hou
 import os
 import re
 import wf_selection
+import mus_tabulate
 from shutil import copyfile
 
 
@@ -266,14 +267,17 @@ def mus_collect () :
     # -----------------------------------------------------------------------------
     readme = "[Link text Here](https://link-url-here.org)"
 
-    for index in range(len(MUS_job_names)):
+    for index in range(len(MUS_job_names_new)):
 
-        # MP4 newname    ------------------
-        readme += MUS_categories[index] + "___" + validate_unix(MUS_job_names[index])
+        line  = (MUS_categories_new[index]+":").ljust(16, " ")
+        line += MUS_job_names_new[index].ljust(60, " ")
+        if MUS_news_new[index] :
+            line += " // NEW"
+        print(line)
 
-        if MUS_news[index] :
-            readme += " // NEW"
-
+    # path_html_mus = out_root_mus + "index.html"
+    # file_html_mus = open( path_html_mus, 'w' )
+    # file_html_mus.write(html_mus)
 
 
 
