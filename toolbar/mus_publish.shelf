@@ -6,13 +6,13 @@
  a single file. -->
 
   <toolshelf name="mus_publish" label="mus_publish">
-    <memberTool name="mus_collect"/>
+    <memberTool name="mus_generate_html"/>
   </toolshelf>
 
-  <tool name="mus_collect" label="mus_collect" icon="PLASMA_App">
+  <tool name="mus_generate_html" label="mus_generate_html" icon="PLASMA_App">
     <script scriptType="python"><![CDATA[import mus_publish
 import imp
 imp.reload(mus_publish)
-mus_publish.mus_collect()]]></script>
+mus_publish.mus_generate_html()]]></script>
   </tool>
 </shelfDocument>
