@@ -7,8 +7,7 @@ came from divine inspiration provided by the Muses.*
 <br/>
 <br/>
 
-### Renders
-[http://mus.ikoon.cz](http://mus.ikoon.cz)
+Renders: [mus.ikoon.cz](http://mus.ikoon.cz)
 
 <br/>
 <br/>
