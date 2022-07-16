@@ -1,16 +1,19 @@
 # **mus**.ikoon.cz
 
+### Gallery
+[mus.ikoon.cz](http://mus.ikoon.cz)
+<br/>
+<br/>
+
+
 ### Motto
 *For the ancient Greeks, the performances of Scientists, Mathematicians,  
-Philosophers and Artists were not their work, but rather  
-came from divine inspiration provided by the Muses.*
+Philosophers and Artists were not their work, but rather came  
+from divine inspiration provided by the Muses.*
 <br/>
 <br/>
 
-Renders: [mus.ikoon.cz](http://mus.ikoon.cz)
 
-<br/>
-<br/>
 
 ### Changelog
 ```
