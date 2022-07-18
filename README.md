@@ -1,4 +1,4 @@
-# **mus**.ikoon.cz
+# mus.ikoon.cz
 
 ### Gallery
 [mus.ikoon.cz](http://mus.ikoon.cz)
@@ -14,7 +14,6 @@ from divine inspiration provided by the Muses.*
 <br/>
 
 
-
 ### Changelog
 ```
 flip:           bullet - fluid from object                    based on: Matt Estela       // NEW
@@ -25,6 +24,6 @@ pyro:           pyro_B                                                          
 rbd:            rbd_C                                         based on: Entagma              
 rnd_tools:      rnd_tools_D                                   based on: Matt Estela              
 ```
-
+ 
 
 ### References
