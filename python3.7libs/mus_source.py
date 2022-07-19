@@ -11,6 +11,16 @@ def change_to_JPG (node) :
 
 # -----------------------------------------------------------------
 
+
+def dirty_codecs (node) :
+    node.node("topnet/codec_web").dirtyWorkItems(False)
+    node.node("topnet/codec_ig").dirtyWorkItems(False)
+
+
+# -----------------------------------------------------------------
+
+
+
 def video_path_to_clipboard (node) :
     
     job_location = hou.getenv("JOB")
@@ -19,7 +29,6 @@ def video_path_to_clipboard (node) :
     if node.parm("render_ig").eval() == 0:
         video_location = str(path.parent.absolute()) + "\_out\out_web.mp4"
         hou.ui.copyTextToClipboard(video_location)
-        os.startfile(video_location)
     
     if node.parm("render_ig").eval() == 1:
         video_location = str(path.parent.absolute()) + "\_out\out_ig.mp4"
