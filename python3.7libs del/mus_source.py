@@ -1,12 +1,16 @@
 import hou
 import os
 from pathlib import Path
+from shutil import copyfile
+
+
 # -----------------------------------------------------------------
 
 def change_to_JPG (node) :
     rop  = node.parm("roppath").evalAsNode()
     path = "$JOB/__data.render/$OS/${OS}_$F4.jpg"
     rop.parm("picture").set(path)
+    rop.parm("aamode").set(5)
 
 
 # -----------------------------------------------------------------
@@ -138,11 +142,21 @@ def asCode_save (node) :
     # callback script:
     # import mus_source; import imp; imp.reload(mus_source); node = kwargs["node"] ; mus_source.asCode_save(node)
 
-    asCode      = hou.node("/obj").asCode(brief=False, recurse=True, save_creation_commands=True, save_spare_parms=True)
+    asCode      = hou.node("/").asCode(brief=False, recurse=True, save_creation_commands=True, save_spare_parms=True)
     path_asCode = str(hou.getenv("HIP")) + "/asCode.py"
     file_asCode = open( path_asCode, 'w' )
     file_asCode.write(asCode)
     file_asCode.close()
+
+    file_src = "Q:/_mus/__publish/templates/hiplc_hipnc/hiplc.hiplc"
+    file_cur = hou.hipFile.path()
+    file_dst = file_cur.replace("v00.hipnc", "v01.hiplc")
+    # print (file_dst)
+    copyfile(file_src, file_dst)
+    
+
+
+
 
 # -----------------------------------------------------------------
 

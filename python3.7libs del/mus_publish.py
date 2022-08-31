@@ -2,7 +2,7 @@ import hou
 import os
 import re
 import wf_selection
-import mus_tabulate
+# import mus_tabulate
 from shutil import copyfile
 
 
@@ -58,7 +58,7 @@ def mus_generate_html () :
 
     # init variables
     # -----------------------------------------------------------------------------
-    weight_minimum_mus = 1
+    weight_minimum_mus = 0
     weight_minimum_www = 5
     new_total_count    = 6
 
@@ -130,7 +130,7 @@ def mus_generate_html () :
         for job_name in job_names :
 
             job_path    = mus_root + mus_cat + "/" + job_name
-            mp4_src     = job_path + "/_out/out.mp4"
+            mp4_src     = job_path + "/_out/out_web.mp4"
             date        = file_date(mp4_src)
             weight      = file_find(job_path, "weight")
             inspiration = file_find(job_path, "inspiration")

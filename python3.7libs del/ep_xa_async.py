@@ -35,7 +35,8 @@ def pin_desktop (node_notes) :
 def reload_source_music(node) :
     # callback script:
     # import imp; import ep_xa_async ; imp.reload(ep_xa_async); node = kwargs["node"] ; ep_xa_async.reload_source_music(node)
-    file_node = node.node("chopnet/file")
+    # print("OK")
+    file_node = node.node("spectrum/chopnet/file")
     file_node.parm("reload").pressButton()
 
 
@@ -43,7 +44,7 @@ def print_music_properties(node) :
     # callback script:
     # import imp; import ep_xa_async ; imp.reload(ep_xa_async); node = kwargs["node"] ; ep_xa_async.print_music_properties(node)
 
-    file_node = node.node("chopnet/OUT")
+    file_node = node.node("spectrum/chopnet/OUT")
     print (file_node)
     # .wav first sample is 0
     # .wav last  sample is [1]-[0]
