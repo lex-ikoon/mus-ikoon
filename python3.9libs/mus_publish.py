@@ -76,7 +76,6 @@ def mus_generate_html () :
     web_root_www = "Q:/_mus/__publish/templates/www/"
 
 
-
     # read index header and footer
     # -----------------------------------------------------------------------------
     with open(web_root_mus + "video_template.html") as video_template_mus: html_video_mus = video_template_mus.read()
@@ -263,25 +262,44 @@ def mus_generate_html () :
 
 
 
+
+    # -----------------------------------------------------------------------------
     # update the README.md
     # -----------------------------------------------------------------------------
-    readme = "[Link text Here](https://link-url-here.org)"
+
+    web_root_mus_git = "Q:/_mus/__publish/templates/mus_git/"
+
+    # read index header and footer
+    # -----------------------------------------------------------------------------
+    with open(web_root_mus_git + "README.md") as readme_template_file:
+        readme_template = readme_template_file.read()
+
+    readme_template_file.close()
+
+
+    find_HEADER_md = readme_template.find("<!-- HEADER -->")
+    find_FOOTER_md = readme_template.find("<!-- FOOTER -->") + 16
+    readme_header  = readme_template[:find_HEADER_md]
+    readme_footer  = readme_template[find_FOOTER_md:]
+
+    readme_new = readme_header
 
     for index in range(len(MUS_job_names_new)):
-
         line  = (MUS_categories_new[index]+":").ljust(16, " ")
         line += MUS_job_names_new[index].ljust(60, " ")
         if MUS_news_new[index] :
             line += " // NEW"
-        print(line)
+        readme_new += line + "\n"
+        
+    readme_new += readme_footer
 
-    # path_html_mus = out_root_mus + "index.html"
-    # file_html_mus = open( path_html_mus, 'w' )
-    # file_html_mus.write(html_mus)
+    path_readme_new = "Q:/_gd/houdini_packages/mus_ikoon/README_gen.md"
+    file_readme_new = open( path_readme_new, 'w' )
+    file_readme_new.write(readme_new)
 
 
 
     # -----------------------------------------------------------------------------
-    # everything is done here
+    # everything is done :)
     # -----------------------------------------------------------------------------
 
