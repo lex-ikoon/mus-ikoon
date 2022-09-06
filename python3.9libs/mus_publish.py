@@ -293,7 +293,7 @@ def mus_generate_html () :
         
     readme_new += readme_footer
 
-    path_readme_new = "Q:/_gd/houdini_packages/mus_ikoon/README_gen.md"
+    path_readme_new = "Q:/_gd/houdini_packages/mus_ikoon/README.md"
     file_readme_new = open( path_readme_new, 'w' )
     file_readme_new.write(readme_new)
 
