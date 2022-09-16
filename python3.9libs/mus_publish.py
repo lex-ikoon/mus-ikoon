@@ -59,7 +59,7 @@ def mus_generate_html () :
     # init variables
     # -----------------------------------------------------------------------------
     weight_minimum_mus = 0
-    weight_minimum_www = 5
+    weight_minimum_www = 0
     new_total_count    = 6
 
 
@@ -224,12 +224,20 @@ def mus_generate_html () :
         # job directory for clipboard    ------------------
         MUS_job_directory = mus_root + MUS_categories[index] + "/" + MUS_job_names[index]
 
+        # prepare inspiration ------------------
+        if MUS_inspirations[index] == "unknown" :
+            MUS_inspiration = ""
+        else :
+            MUS_inspiration = '<div class="credit-text scale-anm all rbd"> Based on R&D by: '
+            MUS_inspiration += MUS_inspirations[index]
+            MUS_inspiration += "</div>"
 
         # customize VIDEO template MUS   ------------------
         html_video_job_mus = html_video_mus
         html_video_job_mus = html_video_job_mus.replace("CATEGORIES",  MUS_category  )
         html_video_job_mus = html_video_job_mus.replace("JOB_DIRECTORY",  MUS_job_directory  )
         html_video_job_mus = html_video_job_mus.replace("MP4_NEW_NAME", "vid/" + MUS_mp4_newname   )
+        html_video_job_mus = html_video_job_mus.replace("<!-- INSPIRATION -->",  MUS_inspiration  )
 
 
         # customize VIDEO template WWW   ------------------
@@ -237,6 +245,7 @@ def mus_generate_html () :
         html_video_job_www = html_video_job_www.replace("CATEGORIES",  MUS_category  )
         html_video_job_www = html_video_job_www.replace("JOB_DIRECTORY",  MUS_job_directory  )
         html_video_job_www = html_video_job_www.replace("MP4_NEW_NAME", "vid/" + MUS_mp4_newname   )
+        html_video_job_www = html_video_job_www.replace("<!-- INSPIRATION -->",  MUS_inspiration  )
 
         # append completed video    ------------------
         html_mus += html_video_job_mus
