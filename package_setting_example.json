@@ -1,0 +1,7 @@
+{
+    "path": "Q:/path_to/mus_ikoon", 
+    "env": [
+        {"mus_path":       "Q:/path_to/mus_ikoon"},
+        {"mus_editor":     "C:/path_to_editor/Microsoft VS Code/Code.exe"}
+    ]
+}

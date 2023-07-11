@@ -1,7 +1,7 @@
 {
-    "path": "Q:/path_to/mus_ikoon", 
+    "path": "Q:/_gd/houdini_packages/mus_ikoon", 
     "env": [
-        {"mus_path":       "Q:/path_to/mus_ikoon"},
-        {"mus_editor":     "C:/path_to_editor/Microsoft VS Code/Code.exe"}
+        {"mus_path":       "Q:/_gd/houdini_packages/mus_ikoon"},
+        {"mus_editor":     "C:/Users/info/AppData/Local/Programs/Microsoft VS Code/Code.exe"}
     ]
 }
