@@ -1,8 +1,19 @@
 ##########################################################
+#############            POSTUP            ###############
+##########################################################
+
+prejmenovat stare
+
+
+
+##########################################################
 #############            OTAZKY            ###############
 ##########################################################
 
-@jak vyresit barevnost
+@ jak vyresit barevnost
+
+@ vsechny xe lines = maji svoje id? NE
+@ vsechny xe lines = maji grouped first/last points? 
 
 
 
@@ -67,19 +78,20 @@ def "xe // lines / connector"
 -------------------------------------------------------------------
 
 
-def "xe // lines / convert points" # three points
-def "xe // lines / convert trails" # cam/pop = musime prevest na DIM + COORD + SPREAD)
-def "xe // lines / dop swirls"
-def "xe // lines / dop system"
-def "xe // lines / eps"
-def "xe // lines / intersect planes"
-def "xe // lines / isocurves"
-def "xe // lines / multiline sweep"
-def "xe // lines / silhouette"
-def "xe // lines / wrap"
+def "xe // curves / connector"
+def "xe // curves / from points" # three points
+def "xe // curves / from trails" # cam/pop = musime prevest na DIM + COORD + SPREAD)
+def "xe // curves / divergence trails" 
+def "xe // curves / eps"
+def "xe // curves / intersect planes" #cut in some direction
+def "xe // curves / isocurves"        #cut in some direction
+def "xe // curves / multiline sweep"  
+def "xe // curves / silhouette"
+def "xe // curves / wrap"
 
 
 -------------------------------------------------------------------
+
 
 def "xf // animate / dim"
     - by id

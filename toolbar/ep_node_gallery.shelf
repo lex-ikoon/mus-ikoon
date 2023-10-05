@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shelfDocument>
+  <!-- This file contains definitions of shelves, toolbars, and tools.
+ It should not be hand-edited when it is being used by the application.
+ Note, that two definitions of the same element are not allowed in
+ a single file. -->
+
+  <toolshelf name="ep_node_gallery" label="ep node gallery">
+    <memberTool name="xe_curves_divergence_trails"/>
+  </toolshelf>
+
+  <tool name="xe_curves_divergence_trails" label="xe // curves / divergence trails (preset)" icon="MISC_generic">
+    <toolMenuContext name="network">
+      <contextOpType>Sop/scatter::2.0</contextOpType>
+    </toolMenuContext>
+    <script scriptType="python"><![CDATA[
+import sys
+import toolutils
+
+outputitem = None
+inputindex = -1
+inputitem = None
+outputindex = -1
+
+num_args = 1
+h_extra_args = ''
+pane = toolutils.activePane(kwargs)
+if not isinstance(pane, hou.NetworkEditor):
+    pane = hou.ui.paneTabOfType(hou.paneTabType.NetworkEditor)
+    if pane is None:
+       hou.ui.displayMessage(
+               'Cannot create node: cannot find any network pane')
+       sys.exit(0)
+else: # We're creating this tool from the TAB menu inside a network editor
+    pane_node = pane.pwd()
+    if "outputnodename" in kwargs and "inputindex" in kwargs:
+        outputitem = pane_node.item(kwargs["outputnodename"])
+        inputindex = kwargs["inputindex"]
+        h_extra_args += 'set arg4 = "' + kwargs["outputnodename"] + '"\n'
+        h_extra_args += 'set arg5 = "' + str(inputindex) + '"\n'
+        num_args = 6
+    if "inputnodename" in kwargs and "outputindex" in kwargs:
+        inputitem = pane_node.item(kwargs["inputnodename"])
+        outputindex = kwargs["outputindex"]
+        h_extra_args += 'set arg6 = "' + kwargs["inputnodename"] + '"\n'
+        h_extra_args += 'set arg9 = "' + str(outputindex) + '"\n'
+        num_args = 9
+    if "autoplace" in kwargs:
+        autoplace = kwargs["autoplace"]
+    else:
+        autoplace = False
+    # If shift-clicked we want to auto append to the current
+    # node
+    if "shiftclick" in kwargs and kwargs["shiftclick"]:
+        if inputitem is None:
+            inputitem = pane.currentNode()
+            outputindex = 0
+    if "nodepositionx" in kwargs and             "nodepositiony" in kwargs:
+        try:
+            pos = [ float( kwargs["nodepositionx"] ),
+                    float( kwargs["nodepositiony"] )]
+        except:
+            pos = None
+    else:
+        pos = None
+
+    if not autoplace and not pane.listMode():
+        if pos is not None:
+            pass
+        elif outputitem is None:
+            pos = pane.selectPosition(inputitem, outputindex, None, -1)
+        else:
+            pos = pane.selectPosition(inputitem, outputindex,
+                                      outputitem, inputindex)
+
+    if pos is not None:
+        if "node_bbox" in kwargs:
+            size = kwargs["node_bbox"]
+            pos[0] -= size[0] / 2
+            pos[1] -= size[1] / 2
+        else:
+            pos[0] -= 0.573625
+            pos[1] -= 0.220625
+        h_extra_args += 'set arg2 = "' + str(pos[0]) + '"\n'
+        h_extra_args += 'set arg3 = "' + str(pos[1]) + '"\n'
+h_extra_args += 'set argc = "' + str(num_args) + '"\n'
+
+pane_node = pane.pwd()
+child_type = pane_node.childTypeCategory().nodeTypes()
+
+if 'vdbadvectpoints' not in child_type:
+   hou.ui.displayMessage(
+           'Cannot create node: incompatible pane network type')
+   sys.exit(0)
+
+# First clear the node selection
+pane_node.setSelected(False, True)
+
+h_path = pane_node.path()
+h_preamble = 'set arg1 = "' + h_path + '"\n'
+h_cmd = r'''
+if ($argc < 2 || "$arg2" == "") then
+   set arg2 = 0
+endif
+if ($argc < 3 || "$arg3" == "") then
+   set arg3 = 0
+endif
+# Automatically generated script
+# $arg1 - the path to add this node
+# $arg2 - x position of the tile
+# $arg3 - y position of the tile
+# $arg4 - input node to wire to
+# $arg5 - which input to wire to
+# $arg6 - output node to wire to
+# $arg7 - the type of this node
+# $arg8 - the node is an indirect input
+# $arg9 - index of output from $arg6
+
+\set noalias = 1
+set saved_path = `execute("oppwf")`
+opcf $arg1
+
+# Node $_obj_geo1_scatter1 (Sop/scatter::2.0)
+set _obj_geo1_scatter1 = `run("opadd -e -n -v scatter::2.0 scatter1")`
+oplocate -x `$arg2 + 0` -y `$arg3 + 0` $_obj_geo1_scatter1
+opparm -V 19.5.640 $_obj_geo1_scatter1 group ( '1 31 57-102 119 124-125 144-145 147 149-152 157-164 169-178 191-192 198-199 208-212 219 227 230-238 247-251 261-266 539-540 568-572 634-636 706 714-718 839-844 859-863 867-869 994-995 1015-1017 1046 1216 1235-1236 1271 1278 1297 1327 1353-1398 1413-1415 1420-1421 1439-1441 1443 1445-1448 1450 1452-1460 1464-1475 1480-1481 1485-1490 1494-1496 1503-1508 1515-1516 1523 1525-1536 1542-1547 1555-1562 1836-1838 1865-1869 1931-1934 2002 2009-2014 2135-2142 2155-2160 2163-2166 2287-2290 2309-2312 2340-2342 2512 2533-2535 2564-2565 2576-2577 2592-2595' )
+opset -d off -r off -h off -f off -y off -t off -l off -s off -u off -F on -c on -e on -b off $_obj_geo1_scatter1
+opexprlanguage -s hscript $_obj_geo1_scatter1
+opuserdata -n '___Version___' -v '19.5.640' $_obj_geo1_scatter1
+opset -p on $_obj_geo1_scatter1
+opcf $arg1
+
+# Node $_obj_geo1_enumerate1 (Sop/enumerate)
+set _obj_geo1_enumerate1 = `run("opadd -e -n -v enumerate enumerate1")`
+oplocate -x `$arg2 + 0` -y `$arg3 + -1.1294999999999993` $_obj_geo1_enumerate1
+opparm -V 19.5.640 $_obj_geo1_enumerate1 grouptype ( point ) attribname ( id )
+opset -d off -r off -h off -f off -y off -t off -l off -s off -u off -F on -c on -e on -b off $_obj_geo1_enumerate1
+opexprlanguage -s hscript $_obj_geo1_enumerate1
+opuserdata -n '___Version___' -v '19.5.640' $_obj_geo1_enumerate1
+opset -p on $_obj_geo1_enumerate1
+opcf $arg1
+
+# Node $_obj_geo1_attribpromote1 (Sop/attribpromote)
+set _obj_geo1_attribpromote1 = `run("opadd -e -n -v attribpromote attribpromote1")`
+oplocate -x `$arg2 + 1.1295999999999999` -y `$arg3 + -4.8192000269293782` $_obj_geo1_attribpromote1
+opparm -V 19.5.640 $_obj_geo1_attribpromote1 inname ( id ) outclass ( primitive ) method ( max )
+opset -d on -r off -h off -f off -y off -t off -l off -s off -u off -F on -c on -e on -b off $_obj_geo1_attribpromote1
+opexprlanguage -s hscript $_obj_geo1_attribpromote1
+opuserdata -n '___Version___' -v '19.5.640' $_obj_geo1_attribpromote1
+opset -p on $_obj_geo1_attribpromote1
+opcf $arg1
+
+# Node $_obj_geo1_fuse1 (Sop/fuse::2.0)
+set _obj_geo1_fuse1 = `run("opadd -e -n -v fuse::2.0 fuse1")`
+oplocate -x `$arg2 + 1.1295999999999999` -y `$arg3 + -3.6897000269293785` $_obj_geo1_fuse1
+opparm $_obj_geo1_fuse1  numpointattribs ( 0 ) numgroups ( 0 )
+opset -d off -r off -h off -f off -y off -t off -l off -s off -u off -F on -c on -e on -b off $_obj_geo1_fuse1
+opexprlanguage -s hscript $_obj_geo1_fuse1
+opuserdata -n '___Version___' -v '19.5.640' $_obj_geo1_fuse1
+opset -p on $_obj_geo1_fuse1
+opcf $arg1
+
+# Node $_obj_geo1_xe_curves_divergence_trails1 (Sop/xe_curves_divergence_trails)
+set _obj_geo1_xe_curves_divergence_trails1 = `run("opadd -e -n -v xe_curves_divergence_trails xe_curves_divergence_trails1")`
+oplocate -x `$arg2 + 2.3090132004981321` -y `$arg3 + 0` $_obj_geo1_xe_curves_divergence_trails1
+opparm $_obj_geo1_xe_curves_divergence_trails1  divgroups ( 2 )
+chblockbegin
+chadd -t 0 0 $_obj_geo1_xe_curves_divergence_trails1 exteriorband
+chkey -t 0 -v 0 -m 0 -a 0 -A 0 -T a  -F '3*ch("voxelsize")' $_obj_geo1_xe_curves_divergence_trails1/exteriorband
+chblockend
+opparm $_obj_geo1_xe_curves_divergence_trails1 folder_velvol ( 1 ) folder_turbulence ( 1 ) swirl_size ( 1 ) divgroup1 ( '1 31 57-80 82-83 89 91-95 99-101 210 264-266 839-841 1233 1274-1275 1297 1327 1353-1379 1383-1397 1494 1505-1506 1557-1562 2135-2140 2529 2570-2571 2592-2595' ) divvalue1 ( 0.83499999999999996 ) divgroup2 ( '299-301 329-331 333-335 358 674-677 768-771 941-944 1595-1597 1625-1627 1629-1631 1654 1970-1973 2048-2049 2064-2067 2237-2240 2603-2606 2633-2636' ) divvalue2 ( -0.80100000000000005 )
+opset -d off -r off -h off -f off -y off -t off -l off -s off -u off -F on -c on -e on -b off $_obj_geo1_xe_curves_divergence_trails1
+opexprlanguage -s hscript $_obj_geo1_xe_curves_divergence_trails1
+opuserdata -n '___Version___' -v '' $_obj_geo1_xe_curves_divergence_trails1
+opset -p on $_obj_geo1_xe_curves_divergence_trails1
+opcf $arg1
+
+# Node $_obj_geo1_vdbadvectpoints1 (Sop/vdbadvectpoints)
+set _obj_geo1_vdbadvectpoints1 = `run("opadd -e -n -v vdbadvectpoints vdbadvectpoints1")`
+oplocate -x `$arg2 + 1.1295999999999999` -y `$arg3 + -2.5602000269293783` $_obj_geo1_vdbadvectpoints1
+opparm -V 19.5.640 $_obj_geo1_vdbadvectpoints1 velgroup ( '@name=vel' ) cptgroup ( '@name=closest_point' ) operation ( cadvection ) timestep ( 10 ) steps ( 100 ) outputstreamlines ( on )
+opset -d off -r off -h off -f off -y off -t off -l off -s off -u off -F on -c on -e on -b off $_obj_geo1_vdbadvectpoints1
+opexprlanguage -s hscript $_obj_geo1_vdbadvectpoints1
+opuserdata -n '___Version___' -v '19.5.640' $_obj_geo1_vdbadvectpoints1
+opset -p on $_obj_geo1_vdbadvectpoints1
+
+opcf $arg1
+opwire -n $_obj_geo1_testgeometry_pighead1 -0 $_obj_geo1_scatter1
+opcf $arg1
+opwire -n $_obj_geo1_scatter1 -0 $_obj_geo1_enumerate1
+opcf $arg1
+opwire -n $_obj_geo1_fuse1 -0 $_obj_geo1_attribpromote1
+opcf $arg1
+opwire -n $_obj_geo1_vdbadvectpoints1 -0 $_obj_geo1_fuse1
+opcf $arg1
+opwire -n $_obj_geo1_testgeometry_pighead1 -0 $_obj_geo1_xe_curves_divergence_trails1
+opcf $arg1
+opwire -n $_obj_geo1_enumerate1 -0 $_obj_geo1_vdbadvectpoints1
+opwire -n $_obj_geo1_xe_curves_divergence_trails1 -1 $_obj_geo1_vdbadvectpoints1
+opwire -n -o 1 $_obj_geo1_xe_curves_divergence_trails1 -2 $_obj_geo1_vdbadvectpoints1
+
+set oidx = 0
+if ($argc >= 9 && "$arg9" != "") then
+    set oidx = $arg9
+endif
+
+if ($argc >= 5 && "$arg4" != "") then
+    set output = $_obj_geo1_attribpromote1
+    opwire -n $output -$arg5 $arg4
+endif
+if ($argc >= 6 && "$arg6" != "") then
+    set input = $_obj_geo1_scatter1
+    if ($arg8) then
+        opwire -n -i $arg6 -0 $input
+    else
+        opwire -n -o $oidx $arg6 -0 $input
+    endif
+endif
+opcf $saved_path
+'''
+hou.hscript(h_preamble + h_extra_args + h_cmd)
+]]></script>
+  </tool>
+</shelfDocument>
