@@ -1,29 +1,18 @@
-##########################################################
-#############            POSTUP            ###############
-##########################################################
-
-prejmenovat stare
-
-
 
 ##########################################################
 #############            OTAZKY            ###############
 ##########################################################
 
 @ jak vyresit barevnost
-
 @ vsechny xe lines = maji svoje id? NE
 @ vsechny xe lines = maji grouped first/last points? 
-
-
-
 
 
 ##########################################################
 #############    ABOVE TARGET nastroje     ###############
 ##########################################################
 
-def "xe // lines / connector"
+def "xe // curves / connector"
 
     NO resample
     NO smooth
@@ -79,27 +68,14 @@ def "xe // lines / connector"
 
 
 def "xe // curves / connector"
-def "xe // curves / from points" # three points
-def "xe // curves / from trails" # cam/pop = musime prevest na DIM + COORD + SPREAD)
 def "xe // curves / divergence trails" 
 def "xe // curves / eps"
+def "xe // curves / from points"      # three points
+def "xe // curves / from trails" # cam/pop = musime prevest na DIM + COORD + SPREAD)
 def "xe // curves / intersect planes" #cut in some direction
-def "xe // curves / isocurves"        #cut in some direction
-def "xe // curves / multiline sweep"  
-def "xe // curves / silhouette"
+def "xe // curves / multiline sweep"
+def "xe // curves / silhouettes"
 def "xe // curves / wrap"
-
-
--------------------------------------------------------------------
-
-
-def "xf // animate / dim"
-    - by id
-    - linear / radial / vdb / id / "dim"
-
-
-def "xf // animate / fill"
-    - spread
 
 
 -------------------------------------------------------------------
@@ -120,7 +96,23 @@ def "xe // edit / match id"
 
 -------------------------------------------------------------------
 
+def "xf // animate / dim"
+    - 
+    - types:
+        - linear
+            - average curve position
+            - first   point position
+            - last    point position
+        - radial
+        - by id
+        - along trail (@ptnum)
+    - edit:
+        - bias
+        - ramp
 
+
+def "xf // animate / fill"
+    - spread
 
 
 
@@ -129,7 +121,7 @@ def "xe // edit / match id"
 ##########################################################
 
 
-def "xg // target"
+def "xf // target"
 
     uvnitr je timeshift
 
@@ -140,6 +132,10 @@ def "xg // target"
         @dim
         @coord
         @spread
+
+
+
+
 
 ##########################################################
 #############           SAMPLER            ###############
