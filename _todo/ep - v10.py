@@ -30,53 +30,6 @@ def "xe // curves / connector"
     NO smooth
 
 
-    output polyline #ma vyhodu, ze muze mit podobny sampling jako targety
-
-    @inputy:
-        prvni     = vezme dva body (z ledky, z geometrie a podobne)
-        uprostred = dalsich X bodu, jak je seradit? merge...
-        treti     = vezme dva body (z ledky, z geometrie a podobne)
-
-    @parm:
-        -------------
-        number of lines
-
-        -------------
-        first:
-            new points:
-                0-10
-
-            direction:
-                two last points on the line
-                point normals
-
-            distance:
-                relative (to next point)
-                absolute (unit length)
-
-
-        -------------
-        middle:
-            transpose [rows / columns]
-            optimal transport to first
-            optimal transport to last
-
-
-        -------------
-        last:
-            
-        -------------
-
-    @priklady:
-        z jedne geometrie
-                pak kruznice
-                pak na geometrii
-        z okraju ledky, pak swirl a pak na geometrii
-        # podel kamery asi nepotrebujem
-
-
-
-
 -------------------------------------------------------------------
 
 
