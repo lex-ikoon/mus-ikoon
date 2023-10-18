@@ -12,13 +12,16 @@ predelat coord na dvojnasobny
 ##########################################################
 
 @ jak vyresit barevnost
+
     - colorize table
+    - color positions
+        - start
+        - end
     - random along curves:
             hue
             saturation
             value
-    - random at start: HSV
-    - random at end: HSV
+
     - similar targetting as clumping?
 
 
