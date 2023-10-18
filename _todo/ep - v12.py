@@ -17,6 +17,7 @@ predelat coord na dvojnasobny
     - color positions
         - start
         - end
+        
     - random along curves:
             hue
             saturation
