@@ -5,6 +5,7 @@
 
 predelat coord na dvojnasobny
 
+predelat coord na SOLVER?
 
 ##########################################################
 #############            OTAZKY            ###############
