@@ -3,11 +3,17 @@
 #############             TODO             ###############
 ##########################################################
 
-predelat coord na dvojnasobny
 
-predelat coord na SOLVER?
+coord   - smooth override predchozich
+# length  - je definovana na keycurve pomoci ramp?
+        # - asi se taky musi smoothovat?
 
-zvlast coord in/out?
+prejmenovat hlavni key_coord
+
+##########################################################
+
+swirl HDA
+
 
 ##########################################################
 #############            OTAZKY            ###############

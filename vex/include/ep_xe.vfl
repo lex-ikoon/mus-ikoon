@@ -2,5 +2,5 @@ string key_path(int i)
 {
     string multiparm  = "../keycurve" + itoa(i);
     string path_rel   = "../" + chs(multiparm);
-    return "op:" + opfullpath(path_rel);
+    return opfullpath(path_rel);
 }
