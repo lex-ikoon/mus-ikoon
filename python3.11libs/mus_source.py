@@ -110,6 +110,23 @@ def set_bg (node) :
     # print(expression)
     camera.parm("vm_background").set(expression)
 
+
+def set_bg_cross (node) :
+    # callback script:
+    # import mus_source; import imp; imp.reload(mus_source); node = kwargs["node"] ; mus_source.set_bg_cross(node)
+    
+    camera      = node.parm("cam").evalAsNode()
+    bg_img_path = node.parm("bg_img_path")
+
+    path        = camera.relativePathTo(node)
+    expression = '''Q:/_gd/houdini_packages/mus_ikoon/tex/mus_source_cross_cam_bg/bg_`padzero(3,chs("''' + path + '''"/bg_img))`.png'''
+    # print(expression)
+    camera.parm("vm_background").set(expression)
+
+# -----------------------------------------------------------------
+
+
+
 # -----------------------------------------------------------------
 
 def remove_bg (node) :
