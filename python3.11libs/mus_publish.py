@@ -66,7 +66,7 @@ def mus_generate_html () :
 
     # init variables
     # -----------------------------------------------------------------------------
-    mus_cats = ["flip", "kinefx", "pyro", "rbd", "rnd_tools", "vellum", "vex"]
+    mus_cats = ["flip", "kinefx", "pyro", "rbd", "rnd_tools", "vellum", "vex", "cop"]
 
     mus_root = "Q:/_mus/"
     out_root_mus = "Q:/_mus/__publish/__out_mus/"
