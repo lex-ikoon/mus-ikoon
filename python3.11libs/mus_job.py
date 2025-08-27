@@ -1,6 +1,6 @@
 import hou
 import imp
-import nodegraphutils
+# import nodegraphutils
 
 import wf_network_layout
 imp.reload(wf_network_layout)
@@ -47,9 +47,10 @@ def job_create (node_job, parm, command) :
 
         
         # ----------------
-        # reconnect & blast
-        nodegraphutils.reconnectAroundItems([job_link_top], False)
-        nodegraphutils.reconnectAroundItems([job_link_bot], False)
+        # # reconnect & blast
+        # TODO
+        # nodegraphutils.reconnectAroundItems([job_link_top], False)
+        # nodegraphutils.reconnectAroundItems([job_link_bot], False)
         job_link_top.destroy()
         job_link_bot.destroy()        
 
